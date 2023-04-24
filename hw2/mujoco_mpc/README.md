@@ -59,7 +59,9 @@ rerun `xvfb-run -a -s "-screen 0 1400x900x24" bash` to resolve it.
 ```
 
 ### Usual commands
+```
 sudo ssh -i /Users/paul-emile/Documents/cs224r_aws_key_pair.pem ubuntu@ipv4
 cd deep-reinforcement-learning-hw2/hw2/mujoco_mpc
 xvfb-run -a -s "-screen 0 1400x900x24" bash
 ./build/bin/mjpc --task="Quadruped Flat" --steps=100 --horizon=0.35 --w0=1.0 --w1=1.0 --w2=1.0 --w3=1.0
+```
