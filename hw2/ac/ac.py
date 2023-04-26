@@ -260,7 +260,7 @@ class PixelACAgent:
         
         obs, action = obs.float(), action.float()
 
-        loss = -self.actor.forward(self.encoder.forward(self.Aug(obs))).log_prob(action).mean()
+        loss = -self.actor.forward(self.encoder.forward(self.aug(obs))).log_prob(action).mean()
         self.encoder_opt.zero_grad()
         self.actor_opt.zero_grad()
         loss.backward()
