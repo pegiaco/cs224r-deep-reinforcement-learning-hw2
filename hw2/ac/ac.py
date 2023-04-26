@@ -193,7 +193,7 @@ class PixelACAgent:
 
         ### YOUR CODE HERE ###
         
-        obs, action, reward, discount, next_obs = obs.float(), action.float(), reward.float(), discount.float(), next_obs.float()
+        obs, action, reward, discount, next_obs = obs.float(), action.float(), reward, discount.float(), next_obs.float()
 
         feature = self.encoder(self.aug(obs))
         next_feature = self.encoder(self.aug(next_obs))
