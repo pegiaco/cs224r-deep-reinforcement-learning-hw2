@@ -221,7 +221,7 @@ class PixelACAgent:
         objective.backward()
         self.actor_opt.step()
 
-        metrics = {'update_loss': objective.item()}
+        metrics = {'update_loss': loss.item(), 'bellman_target': bellman_target.item(), 'update_objective': objective.item()}
 
         #####################
         return metrics
