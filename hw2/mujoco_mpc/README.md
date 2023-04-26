@@ -69,5 +69,4 @@ xvfb-run -a -s "-screen 0 1400x900x24" bash
 ### Usual commands (GPU)
 ```
 cd deep-reinforcement-learning-hw2/hw2/ac/
-source /home/ubuntu/.bashrc
 conda activate PixelAC
