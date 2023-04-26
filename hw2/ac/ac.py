@@ -200,9 +200,9 @@ class PixelACAgent:
 
         next_state_actions = self.actor(next_feature)
 
-        critics_list = self.critic_target(self.encoder.forward(next_obs), next_state_actions.sample())
-        ind = np.random.choice(np.arange(len(critics_list)), size=2)
-        bellman_target = reward + discount * torch.min(torch.stack([critics_list[ind[0]], critics_list[ind[1]]]))
+        target_critics_list = self.critic_target(self.encoder.forward(next_obs), next_state_actions.sample())
+        ind = np.random.choice(np.arange(len(target_critics_list)), size=2)
+        bellman_target = reward + discount * torch.min(torch.stack([target_critics_list[ind[0]], target_critics_list[ind[1]]]))
 
         loss = torch.sum(torch.square(torch.stack(self.critic(feature, action)) - bellman_target.detach()))
 
@@ -215,7 +215,8 @@ class PixelACAgent:
         utils.soft_update_params(self.critic, self.critic_target, self.critic_target_tau)
 
         action_from_actor = self.actor.forward(feature).sample().detach()
-        objective = -torch.sum(torch.stack(self.critic(feature.detach(), action_from_actor)))
+        critics_list = torch.stack(self.critic(feature.detach(), action_from_actor))
+        objective = -torch.sum(critics_list)/len(critics_list)
 
         self.actor_opt.zero_grad()
         objective.backward()
