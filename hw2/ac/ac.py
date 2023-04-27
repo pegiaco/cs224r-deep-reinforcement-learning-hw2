@@ -214,7 +214,7 @@ class PixelACAgent:
 
         utils.soft_update_params(self.critic, self.critic_target, self.critic_target_tau)
 
-        action_from_actor = self.actor.forward(feature).detach().rsample()
+        action_from_actor = self.actor.forward(feature).rsample().detach()
         critics_list = torch.stack(self.critic(feature.detach(), action_from_actor))
         objective = -torch.sum(critics_list)/len(critics_list)
 
